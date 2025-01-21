@@ -1,8 +1,15 @@
+import { ThemeProvider } from "styled-components"
+import { Blog } from "./page/Blog"
+import { Post } from "./page/Post"
+import { GlobalStyle } from "./styles/global"
+
 export function App() {
   return (
-    <>
-      <h1>Hello, World!</h1>
-    </>
+    <ThemeProvider>
+      <Blog/>
+      <Post/>
+      <GlobalStyle/>
+    </ThemeProvider>
   )
 }
 
