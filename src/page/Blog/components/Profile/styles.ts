@@ -14,19 +14,16 @@ export const ProfileContainer = styled.section`
   margin-top: -6rem;
 
   img {
+    width: 9.25rem;
+    height: 9.25rem;
     border-radius: 10px;
   }
-
 `
-
 export const ProfileContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
   p {
     ${mixins.textM}
     color: ${props => props.theme["base-text"]};
+    margin-top: 0.5rem;
   }
 `
 export const ProfileHeader = styled.header`
@@ -46,6 +43,10 @@ export const NavContainer = styled.div`
     align-self: baseline;
     gap: 0.5rem;
 
+    svg {
+      width: 0.75rem;
+      height: 0.75rem;
+    }
 `
 
 export const NavGit = styled(NavLink)`
@@ -54,15 +55,19 @@ export const NavGit = styled(NavLink)`
 `
 
 export const ProfileInfo = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
   max-width: max-content;
 
-  div {
+  ul {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  }
+
+  li {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 8px;
   }
 
   span {
