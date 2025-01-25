@@ -37,5 +37,10 @@ export const mixins = {
     text-transform: uppercase;
     text-decoration: none;
     line-height: 160%;
+  `,
+  'textCode': css`
+    font-size: 1rem;
+    line-height: 160%;
+    font-family: 'Fira Code', sans-serif;
   `
 } as const
