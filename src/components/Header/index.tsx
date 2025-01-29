@@ -2,7 +2,7 @@ import headerImage from '../../assets/headerImage.svg'
 import { HeaderContainer } from './styles'
 
 export function Header() {
-  return(
+  return (
     <HeaderContainer>
       <img src={headerImage} alt="" />
     </HeaderContainer>
