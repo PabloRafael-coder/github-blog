@@ -10,6 +10,7 @@ interface User {
 
 interface ReposContextType {
   user: User
+  fetchIssuesData: (query?: string) => Promise<void>
 }
 
 export const ReposContext = createContext({} as ReposContextType)
@@ -21,17 +22,29 @@ interface ReposContextProviderProps {
 export function ReposContextProvider({ children }: ReposContextProviderProps) {
   const [user, setUser] = useState<User>({} as User)
 
-  async function handleRespoFetch() {
-    const response = await api.get('PabloRafael-coder')
+  async function fetchUserData() {
+    const userData = await api.get('users/PabloRafael-coder')
 
-    setUser(response.data)
+    setUser(userData.data)
+  }
+
+  async function fetchIssuesData(query?: string) {
+    const issuesData = await api.get('search/issues', {
+      params: {
+        q: query,
+      },
+    })
+    console.log(issuesData)
   }
 
   useEffect(() => {
-    handleRespoFetch()
+    fetchIssuesData()
+    fetchUserData()
   }, [])
 
   return (
-    <ReposContext.Provider value={{ user }}>{children}</ReposContext.Provider>
+    <ReposContext.Provider value={{ user, fetchIssuesData }}>
+      {children}
+    </ReposContext.Provider>
   )
 }
