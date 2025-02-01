@@ -8,6 +8,11 @@ interface User {
   followers: number
 }
 
+interface Issues {
+  title: string
+  body: string
+}
+
 interface ReposContextType {
   user: User
   fetchIssuesData: (query?: string) => Promise<void>
@@ -21,20 +26,21 @@ interface ReposContextProviderProps {
 
 export function ReposContextProvider({ children }: ReposContextProviderProps) {
   const [user, setUser] = useState<User>({} as User)
+  const [issues, setIssues] = useState<Issues[]>([])
 
   async function fetchUserData() {
-    const userData = await api.get('users/PabloRafael-coder')
+    const userName = 'PabloRafael-coder'
+    const userData = await api.get(`users/${userName}`)
 
     setUser(userData.data)
   }
 
   async function fetchIssuesData(query?: string) {
-    const issuesData = await api.get('search/issues', {
-      params: {
-        q: query,
-      },
-    })
-    console.log(issuesData)
+    const issuesData = await api.get(
+      `search/issues?q=${query}%20repo:PabloRafael-coder/github-blog`,
+    )
+
+    setIssues(issuesData.data.items)
   }
 
   useEffect(() => {
@@ -43,7 +49,12 @@ export function ReposContextProvider({ children }: ReposContextProviderProps) {
   }, [])
 
   return (
-    <ReposContext.Provider value={{ user, fetchIssuesData }}>
+    <ReposContext.Provider
+      value={{
+        user,
+        fetchIssuesData,
+      }}
+    >
       {children}
     </ReposContext.Provider>
   )

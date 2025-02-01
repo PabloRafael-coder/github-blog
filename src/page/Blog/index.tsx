@@ -26,7 +26,7 @@ export function Blog() {
   })
 
   const onSubmit: SubmitHandler<SearchPostFormData> = async (data) => {
-    await fetchIssuesData(`${data.query}%20repo:PabloRafael-coder/github-blog`)
+    await fetchIssuesData(data.query)
   }
 
   return (
