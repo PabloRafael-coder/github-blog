@@ -1,16 +1,15 @@
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale/pt-BR'
-import { CardContainer, CardHeader } from './styles'
-import Markdown from 'react-markdown'
+import { CardBody, CardContainer, CardHeader } from './styles'
 
-interface Issues {
+interface CardProps {
   title: string
   body: string
   created_at: string
   number: number
 }
 
-export function Card({ title, body, created_at: createAt, number }: Issues) {
+export function Card({ title, body, created_at: createAt, number }: CardProps) {
   return (
     <CardContainer to={`post/${number}`}>
       <CardHeader>
@@ -22,9 +21,7 @@ export function Card({ title, body, created_at: createAt, number }: Issues) {
           })}
         </span>
       </CardHeader>
-      <div>
-        <Markdown>{body}</Markdown>
-      </div>
+      <CardBody>{body}</CardBody>
     </CardContainer>
   )
 }
