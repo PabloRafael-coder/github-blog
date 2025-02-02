@@ -46,7 +46,7 @@ export const SearchFormContainer = styled.form`
       color: ${(props) => props.theme['base-label']};
     }
 
-    &:active {
+    &:focus {
       border: 1px solid ${(props) => props.theme.blue};
       color: ${(props) => props.theme['base-text']};
     }
@@ -56,4 +56,5 @@ export const CardsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
+  margin-bottom: 15rem;
 `
