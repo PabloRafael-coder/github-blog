@@ -11,10 +11,13 @@ interface User {
 interface Issues {
   title: string
   body: string
+  number: number
+  created_at: string
 }
 
 interface ReposContextType {
   user: User
+  issues: Issues[]
   fetchIssuesData: (query?: string) => Promise<void>
 }
 
@@ -36,9 +39,14 @@ export function ReposContextProvider({ children }: ReposContextProviderProps) {
   }
 
   async function fetchIssuesData(query?: string) {
-    const issuesData = await api.get(
-      `search/issues?q=${query}%20repo:PabloRafael-coder/github-blog`,
-    )
+    const userName = 'PabloRafael-coder'
+    const repo = 'github-blog'
+
+    const issuesData = await api.get(`search/issues`, {
+      params: {
+        q: `${query} repo:${userName}/${repo}`,
+      },
+    })
 
     setIssues(issuesData.data.items)
   }
@@ -52,6 +60,7 @@ export function ReposContextProvider({ children }: ReposContextProviderProps) {
     <ReposContext.Provider
       value={{
         user,
+        issues,
         fetchIssuesData,
       }}
     >

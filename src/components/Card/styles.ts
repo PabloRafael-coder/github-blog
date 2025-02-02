@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { mixins } from '../../styles/mixins'
+import { Link } from 'react-router'
 
-export const CardContainer = styled.div`
+export const CardContainer = styled(Link)`
   max-width: 26rem;
   padding: 2rem;
   background: ${(props) => props.theme['base-post']};
@@ -10,6 +11,7 @@ export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  text-decoration: none;
 
   p {
     ${mixins.textM}

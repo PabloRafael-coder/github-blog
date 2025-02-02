@@ -19,7 +19,7 @@ const searchPostSchema = z.object({
 type SearchPostFormData = z.infer<typeof searchPostSchema>
 
 export function Blog() {
-  const { fetchIssuesData } = useContext(ReposContext)
+  const { issues, fetchIssuesData } = useContext(ReposContext)
 
   const { register, handleSubmit } = useForm<SearchPostFormData>({
     resolver: zodResolver(searchPostSchema),
@@ -36,7 +36,11 @@ export function Blog() {
         <SearchFormContainer onSubmit={handleSubmit(onSubmit)}>
           <header>
             <h2>Publicações</h2>
-            <span>6 publicações</span>
+            <span>
+              {issues.length > 1
+                ? issues.length + ' publicações'
+                : issues.length + ' publicação'}
+            </span>
           </header>
           <input
             type="text"
@@ -46,12 +50,9 @@ export function Blog() {
           />
         </SearchFormContainer>
         <CardsContainer>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {issues.map((item) => {
+            return <Card key={item.number} {...item} />
+          })}
         </CardsContainer>
       </BlogContent>
     </BlogContainer>
