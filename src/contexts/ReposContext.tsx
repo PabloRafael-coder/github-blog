@@ -1,4 +1,10 @@
-import { createContext, useEffect, useState, type ReactNode } from 'react'
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useState,
+  type ReactNode,
+} from 'react'
 import { api } from '../lib/axios'
 
 interface User {
@@ -15,10 +21,19 @@ interface Issues {
   created_at: string
 }
 
+interface PostIssues {
+  created_at: string
+  comments: number
+  body: string
+  title: string
+}
+
 interface ReposContextType {
   user: User
   issues: Issues[]
+  postIssues: PostIssues
   fetchIssuesData: (query?: string) => Promise<void>
+  searchForIssuesByNumber: (issuesNumber?: string) => Promise<void>
 }
 
 export const ReposContext = createContext({} as ReposContextType)
@@ -30,6 +45,7 @@ interface ReposContextProviderProps {
 export function ReposContextProvider({ children }: ReposContextProviderProps) {
   const [user, setUser] = useState<User>({} as User)
   const [issues, setIssues] = useState<Issues[]>([])
+  const [postIssues, setPostIssues] = useState<PostIssues>({} as PostIssues)
 
   async function fetchUserData() {
     const userName = 'PabloRafael-coder'
@@ -51,6 +67,14 @@ export function ReposContextProvider({ children }: ReposContextProviderProps) {
     setIssues(issuesData.data.items)
   }
 
+  const searchForIssuesByNumber = useCallback(async (issuesNumber?: string) => {
+    const { data } = await api.get(
+      `repos/PabloRafael-coder/github-blog/issues/${issuesNumber}`,
+    )
+
+    setPostIssues(data)
+  }, [])
+
   useEffect(() => {
     fetchIssuesData()
     fetchUserData()
@@ -61,7 +85,9 @@ export function ReposContextProvider({ children }: ReposContextProviderProps) {
       value={{
         user,
         issues,
+        postIssues,
         fetchIssuesData,
+        searchForIssuesByNumber,
       }}
     >
       {children}

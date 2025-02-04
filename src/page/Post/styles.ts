@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import { mixins } from "../../styles/mixins";
+import styled from 'styled-components'
+import { mixins } from '../../styles/mixins'
+import Markdown from 'react-markdown'
 
 export const PostContainer = styled.main`
   margin: 0 auto;
@@ -22,27 +23,26 @@ export const NavigationList = styled.ul`
     align-items: center;
 
     a {
-    color: ${props => props.theme.blue};
-    text-decoration: none;
-    ${mixins.componentsLink}
+      color: ${(props) => props.theme.blue};
+      text-decoration: none;
+      ${mixins.componentsLink}
     }
 
     svg {
-    width: 0.875rem;
-    height: 0.875rem;
+      width: 0.875rem;
+      height: 0.875rem;
     }
   }
 `
-
 
 export const PostInfo = styled.div`
   margin-top: -6rem;
   border-radius: 10px;
   padding: 2rem;
-  background: ${props => props.theme["base-profile"]};
+  background: ${(props) => props.theme['base-profile']};
 
   h1 {
-    color: ${props => props.theme["base-title"]};
+    color: ${(props) => props.theme['base-title']};
     margin-bottom: 1.25rem;
     ${mixins.titleL}
   }
@@ -52,7 +52,7 @@ export const PostInfoList = styled.ul`
   grid-template-columns: repeat(3, max-content);
   gap: 2rem;
 
-  li { 
+  li {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -61,48 +61,56 @@ export const PostInfoList = styled.ul`
     svg {
       width: 1.125rem;
       height: 1.125rem;
-      color: ${props => props.theme["base-label"]}
+      color: ${(props) => props.theme['base-label']};
     }
 
     span {
       ${mixins.textM}
-      color: ${props => props.theme["base-span"]};
+      color: ${(props) => props.theme['base-span']};
     }
   }
 `
-export const PostContent = styled.div`
+export const PostContent = styled(Markdown)`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   padding: 2.5rem 2rem;
 
   p {
-    color: ${props => props.theme["base-text"]};
+    color: ${(props) => props.theme['base-text']};
     ${mixins.textM}
+  }
+
+  a {
+    color: ${(props) => props.theme.blue};
+  }
+
+  h3 {
+    ${mixins.titleS}
+    color: ${(props) => props.theme['base-subtitle']}
   }
 `
 export const TextColorSpan = styled.span`
-  color: ${props => props.theme.blue};
+  color: ${(props) => props.theme.blue};
   text-decoration: underline;
 `
 export const CodeContent = styled.div`
   border-radius: 2px;
   padding: 1rem;
-  background: ${props => props.theme["base-post"]};
+  background: ${(props) => props.theme['base-post']};
 
   p {
     ${mixins.textCode}
   }
 `
 export const ColorValueSpan = styled.span`
-  color: #6AD445;
+  color: #6ad445;
 `
 
 export const VariableColor = styled.span`
-  color: #80ABD6;
+  color: #80abd6;
 `
 
 export const CommentColorSpan = styled.span`
-  color: #4F6173;
-
+  color: #4f6173;
 `
