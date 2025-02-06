@@ -18,7 +18,7 @@ import {
 
 import { useContext, useEffect } from 'react'
 import { ReposContext } from '../../contexts/ReposContext'
-import { useParams } from 'react-router'
+import { NavLink, useParams } from 'react-router'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale/pt-BR'
 
@@ -44,10 +44,14 @@ export function Post() {
                   icon={faChevronLeft}
                   style={{ color: '#3294f8' }}
                 />
-                <a href="">Voltar</a>
+                <NavLink to="/">Voltar</NavLink>
               </li>
               <li>
-                <a href="">Ver no github</a>
+                <NavLink
+                  to={`https://github.com/PabloRafael-coder/github-blog/issues/${issueNumber}`}
+                >
+                  Ver no github
+                </NavLink>
                 <FontAwesomeIcon
                   icon={faArrowUpRightFromSquare}
                   style={{ color: '#3294f8' }}
