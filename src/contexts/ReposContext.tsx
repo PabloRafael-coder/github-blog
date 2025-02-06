@@ -33,7 +33,7 @@ interface ReposContextType {
   issues: Issues[]
   postIssues: PostIssues
   fetchIssuesData: (query?: string) => Promise<void>
-  searchForIssuesByNumber: (issuesNumber?: string) => Promise<void>
+  searchForIssueByNumber: (issueNumber?: string) => Promise<void>
 }
 
 export const ReposContext = createContext({} as ReposContextType)
@@ -67,9 +67,9 @@ export function ReposContextProvider({ children }: ReposContextProviderProps) {
     setIssues(issuesData.data.items)
   }
 
-  const searchForIssuesByNumber = useCallback(async (issuesNumber?: string) => {
+  const searchForIssueByNumber = useCallback(async (issueNumber?: string) => {
     const { data } = await api.get(
-      `repos/PabloRafael-coder/github-blog/issues/${issuesNumber}`,
+      `repos/PabloRafael-coder/github-blog/issues/${issueNumber}`,
     )
 
     setPostIssues(data)
@@ -87,7 +87,7 @@ export function ReposContextProvider({ children }: ReposContextProviderProps) {
         issues,
         postIssues,
         fetchIssuesData,
-        searchForIssuesByNumber,
+        searchForIssueByNumber,
       }}
     >
       {children}

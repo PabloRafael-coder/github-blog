@@ -23,13 +23,15 @@ import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale/pt-BR'
 
 export function Post() {
-  const { user, postIssues, searchForIssuesByNumber } = useContext(ReposContext)
+  const { user, postIssues, searchForIssueByNumber } = useContext(ReposContext)
 
   const { issueNumber } = useParams()
 
   useEffect(() => {
-    searchForIssuesByNumber(issueNumber)
-  }, [issueNumber, searchForIssuesByNumber])
+    if (issueNumber) {
+      searchForIssueByNumber(issueNumber)
+    }
+  }, [issueNumber, searchForIssueByNumber])
 
   return (
     <PostContainer>
