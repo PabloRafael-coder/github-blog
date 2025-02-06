@@ -103,14 +103,3 @@ export const CodeContent = styled.div`
     ${mixins.textCode}
   }
 `
-export const ColorValueSpan = styled.span`
-  color: #6ad445;
-`
-
-export const VariableColor = styled.span`
-  color: #80abd6;
-`
-
-export const CommentColorSpan = styled.span`
-  color: #4f6173;
-`
